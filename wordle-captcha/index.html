@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, intial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Account Registration</title>
 </head>
 <body>
     <header>
-        <h3>Register Account</h3>
     </header>
     <main>
-        <form id="inputForm">
-            <label for="fName">Name</label><br>
-            <input type="text" id="fName"><br>
-            <label for="fEmail">Email</label><br>
-            <input type="text" id="fEmail"><br>
-        </form><br>
-        <div id="divCaptcha">
-            <input type="button" id="startCaptcha" value="Start"><br>
-            <p id="captchaString"></p>
-            <div id="divCaptchaTries">
-                <!-- <input type="text" class="letterInput" maxlength="1">
-                <input type="text" class="letterInput" maxlength="1">
-                <input type="text" class="letterInput" maxlength="1">
-                <input type="text" class="letterInput" maxlength="1">
-                <input type="text" class="letterInput" maxlength="1">
-                <input type="text" class="letterInput" maxlength="1"> -->
+        <div id="mainContainer" class="mainContainer">
+            <p id="pageHeader">Create Account</p>
+            <form id="inputForm">
+                <div class="fQuestion">
+                    <label for="fName">Name</label>
+                    <input type="text" id="fName" class="formInput"><br>
+                </div>
+                <div class="fQuestion">
+                    <label for="fEmail">Email</label>
+                    <input type="text" id="fEmail" class="formInput"><br>
+                </div>
+            </form><br>
+            <div id="divCaptcha">
+                <input type="button" id="startCaptcha" value="Start"><br>
+                <p id="captchaString"></p>
+                <div id="divCaptchaTries">
+                </div>
+                <p id="captchaResults"></p>
             </div>
-            <p id="captchaResults"></p>
         </div>
     </main>
     <script src="script.js"></script>

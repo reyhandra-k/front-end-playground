@@ -15,13 +15,15 @@ const captchaLenght = 6;
 let numberOfTries = 0;
 
 let captchaTries = () => {
+    // console.log(numberOfTries);
+    var divTries = $('<div id=\"divCaptchaIteration' + numberOfTries + '\">')
     var box = $('<input type=\"text\" class=\"letterInput\" maxlength=\"1\"></input>');
+
+    $('#divCaptchaTries').append(divTries);
     for (var i = 0; i < captchaLenght; i++) {
-        // console.log(i);
-        $('#divCaptchaTries').append(box.clone());
+        $('#divCaptchaIteration'+numberOfTries).append(box.clone());
     }
-    $('#divCaptchaTries').append($('<br>'))
-    // console.log("Test")
+    $('#divCaptchaTries').append($('</div>'));
 };
 
 let captchaInit = () => {
@@ -29,14 +31,14 @@ let captchaInit = () => {
     for (var i = 0; i <= captchaLenght-1; i++) {
         captcha[i] = (chars[Math.floor(Math.random() * chars.length)])
     }
-    // console.log(captcha);
+    console.log(captcha);
     return captcha
 };
 
 $('#startCaptcha').click(function() {
     captchaTries();
     captcha = captchaInit();
-    $('#captchaString').text("Your captcha is "+captcha);
+    $('#captchaString').text("Solve the puzzle below to prove you are not a robot");
 });
 
 
@@ -47,22 +49,39 @@ let captchaCheck = (e) => {
     if (key === "Enter") {
         // CHECKING CORRECTNESS
         let ans = [];
-        $('input.letterInput').each(function (index, value) {
+        $('#divCaptchaIteration' + numberOfTries + ' input').each(function (index, value) {
             ans.push($(this).val());
-            console.log(index);
-            if ($(this).val() == captcha[index-(6*numberOfTries)]) {
-                $(this).css('background-color','green');
-            } else if (captcha.includes($(this).val())) {
-                $(this).css('background-color','yellow');
+        });
+        
+        // console.log(ans);
+        if (ans.includes('')) {
+            // alert("Please Fill Form")
+            return
+        };
+
+        $.each(ans, function(index,value) {
+            if (value == captcha[index]) {
+                $('#divCaptchaIteration' + numberOfTries + ' input:eq(' + index + ')').css('background-color','#39FF14');
+            } else if (captcha.includes(value)) {
+                $('#divCaptchaIteration' + numberOfTries + ' input:eq(' + index + ')').css('background-color','yellow');
             }
         });
+
         if(JSON.stringify(ans.slice(-6)) === JSON.stringify(captcha)) {
             console.log("Correct")
+            $('#captchaResults').text("You have proved your human nature");    
         } else {
-            captchaTries();
+            $('#divCaptchaIteration' + numberOfTries + ' input').prop('disabled',true);
+            if (numberOfTries < 5) {
             numberOfTries = numberOfTries + 1
+            captchaTries();
+            $('#divCaptchaIteration' + numberOfTries + " input:first").focus();
+            } else {
+                console.log("You Failed")
+                $('#captchaResults').text("Loser robot, your captcha is "+captcha);
+
+            }
         }
-        // ISSUE: ON SECOND TRY INDEX IS >6
         // COLORING CORRECTNESS
         // CREATING NEW ROW
     }
