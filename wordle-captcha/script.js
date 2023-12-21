@@ -36,9 +36,16 @@ let captchaInit = () => {
 };
 
 $('#startCaptcha').click(function() {
-    captchaTries();
-    captcha = captchaInit();
-    $('#captchaString').text("Solve the puzzle below to prove you are not a robot");
+    if ($(this).is(':checked')) {
+        captchaTries();
+        captcha = captchaInit();
+        $('#captchaString').text("Solve the puzzle below to prove you are not a robot");
+    } else {
+        $('#captchaString').text("");
+        $('#divCaptchaTries').html("");
+        $('#captchaResults').text("");
+        numberOfTries = 0;
+    }
 });
 
 
@@ -64,6 +71,8 @@ let captchaCheck = (e) => {
                 $('#divCaptchaIteration' + numberOfTries + ' input:eq(' + index + ')').css('background-color','#39FF14');
             } else if (captcha.includes(value)) {
                 $('#divCaptchaIteration' + numberOfTries + ' input:eq(' + index + ')').css('background-color','yellow');
+            } else {
+                $('#divCaptchaIteration' + numberOfTries + ' input:eq(' + index + ')').css('background-color','rgb(28, 55, 163,.15');
             }
         });
 
@@ -78,12 +87,10 @@ let captchaCheck = (e) => {
             $('#divCaptchaIteration' + numberOfTries + " input:first").focus();
             } else {
                 console.log("You Failed")
-                $('#captchaResults').text("Loser robot, your captcha is "+captcha);
+                $('#captchaResults').text("Loser robot, your captcha is "+ captcha.join(''));
 
             }
         }
-        // COLORING CORRECTNESS
-        // CREATING NEW ROW
     }
 };
 

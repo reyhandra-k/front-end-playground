@@ -17,19 +17,32 @@
     </header>
     <main>
         <div id="mainContainer" class="mainContainer">
-            <p id="pageHeader">Create Account</p>
-            <form id="inputForm">
-                <div class="fQuestion">
-                    <label for="fName">Name</label>
-                    <input type="text" id="fName" class="formInput"><br>
-                </div>
-                <div class="fQuestion">
-                    <label for="fEmail">Email</label>
-                    <input type="text" id="fEmail" class="formInput"><br>
-                </div>
-            </form><br>
+            <div id="divForm">
+                <p id="pageHeader">Create Account</p>
+                <form id="formInput">
+                    <div class="divFormQuestionGroup">
+                        <label for="fName" class="labelFormQuestion">Name</label>
+                        <input type="text" id="fName" class="inputFormQuestion"><br>
+                    </div>
+                    <div class="divFormQuestionGroup">
+                        <label for="fEmail" class="labelFormQuestion">Email</label>
+                        <input type="text" id="fEmail" class="inputFormQuestion"><br>
+                    </div>
+                    <div class="divFormQuestionGroup">
+                        <label for="fPassword" class="labelFormQuestion">Password</label>
+                        <input type="password" id="fPassword" class="inputFormQuestion"><br>
+                    </div>
+                    <div class="divFormQuestionGroup">
+                        <label for="fConfirmPassword" class="labelFormQuestion">Confirm Password</label>
+                        <input type="password" id="fConfirmPassword" class="inputFormQuestion"><br>
+                    </div>
+                </form><br>
+                <div id="divCaptchaStartBox">
+                    <input type="checkbox" id="startCaptcha" value="Start"><br>
+                    <label for="startCaptcha" id="labelStartCaptcha">I'm not a robot</label>
+                </div><br>
+            </div>
             <div id="divCaptcha">
-                <input type="button" id="startCaptcha" value="Start"><br>
                 <p id="captchaString"></p>
                 <div id="divCaptchaTries">
                 </div>
